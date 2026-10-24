@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignUuid('author_id')->constrained('users')->cascadeOnDelete();
             $table->foreignUuid('category_id')->nullable()->constrained('categories')->nullOnDelete();
             
-            $table->string('title');
-            $table->string('slug');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
             $table->text('content');
             $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestampTz('published_at')->nullable();
