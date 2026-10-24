@@ -28,7 +28,7 @@ class TagPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole([]);
+        return $user->hasRole(['admin']);
     }
 
     /**
@@ -36,7 +36,7 @@ class TagPolicy
      */
     public function update(User $user, Tag $tag): bool
     {
-        return $user->hasRole([]);
+        return $user->hasRole(['admin']);
 
     }
 
@@ -45,7 +45,7 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag): bool
     {
-        return $user->hasRole([]);
+        return $user->hasRole(['admin']);
     }
 
     /**
@@ -53,7 +53,7 @@ class TagPolicy
      */
     public function restore(User $user, Tag $tag): bool
     {
-        return $user->hasRole([]);
+        return $user->hasRole(['admin']);
     }
 
     /**
@@ -61,6 +61,6 @@ class TagPolicy
      */
     public function forceDelete(User $user, Tag $tag): bool
     {
-        return $user->hasRole([]);
+        return $user->hasRole(['admin']);
     }
 }
