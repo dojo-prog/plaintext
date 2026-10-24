@@ -45,7 +45,7 @@ class UpdatePostRequest extends FormRequest
 
             'title.required' => 'Post title is required',
             'title.string' => 'Post title must be a valid string',
-            'title.unique' => 'A post with this title already exists',
+            'title.unique' => 'You already have a post with this title',
             'title.min' => 'Post title must be at least :min characters long',
             'title.max' => 'Post title cannot exceed :max characters',
 
