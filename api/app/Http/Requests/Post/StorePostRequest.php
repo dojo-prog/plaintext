@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Post;
 
+use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -13,7 +15,12 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('create', Post::class);
+    }
+
+    public function failedAuthorization()
+    {
+        return new AuthorizationException('Only authenticated users can create posts.');
     }
 
     /**
