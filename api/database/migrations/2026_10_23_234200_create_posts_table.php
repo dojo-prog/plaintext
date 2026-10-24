@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('content');
-            $table->enum('status', ['draft', 'published']);
+            $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestampTz('published_at')->nullable();
             $table->timestamps();
         });
