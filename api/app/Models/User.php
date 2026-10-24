@@ -40,6 +40,11 @@ class User extends Authenticatable
         'role',
     ];
 
+    public function hasRole(array $roles): bool
+    {
+        return in_array($this->role, $roles);
+    }
+
     public function posts(): HasMany 
     {
         return $this->hasMany(Post::class, 'author_id');
