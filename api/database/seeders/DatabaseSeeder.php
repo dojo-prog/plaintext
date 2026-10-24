@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +20,65 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        if (app()->environment('production')) {
+            $this->command->info('DatabaseSeeder skipped in production.');
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+            return;
+        }
+
+        $this->command->info('Resetting seeded data...');
+
+        User::query()->delete();
+        Category::query()->delete();
+        Tag::query()->delete();
+        Comment::query()->delete();
+        Post::query()->delete();
+
+        $primaryUser = User::updateOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'username' => 'test-user',
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        $users = User::factory()
+            ->count(2)
+            ->create()
+            ->push($primaryUser);
+
+        $this->command->info('Seeding categories, tags and posts...');
+
+        $categories = Category::factory()->count(4)->create();
+        $tags = Tag::factory()->count(6)->create();
+
+        $posts = Post::factory()
+            ->count(10)
+            ->for(User::factory()->recycle($users), 'author')
+            ->for(Category::factory()->recycle($categories))
+            ->create();
+
+        $this->command->info('Attaching comments, tags and likes...');
+
+        $posts->each(function (Post $post) use ($users, $tags) {
+            Comment::factory()
+                ->count(fake()->numberBetween(0, 2))
+                ->for($post)
+                ->for(User::factory()->recycle($users))
+                ->create();
+
+            $post->tags()->attach(
+                $tags->random(fake()->numberBetween(1, 3))->pluck('id')
+            );
+        });
+
+        $users->each(function (User $user) use ($posts) {
+            $user->likedPosts()->attach(
+                $posts->random(3)->pluck('id')->unique()
+            );
+        });
+
+        $this->command->info('Seeding finished.');
     }
 }
