@@ -31,7 +31,7 @@ class UpdatePostRequest extends FormRequest
                 'string',
                 'min:2',
                 'max:200',
-                Rule::unique('posts', 'title')->ignore($this->route('post')),
+                Rule::unique('posts', 'title')->where('author_id', request()->user->id)->ignore($this->route('post')),
             ],
             'content' => 'sometimes|required|string|min:10|max:2000',
             'status' => ['sometimes', 'string', Rule::in(['draft', 'published'])],

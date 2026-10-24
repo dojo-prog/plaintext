@@ -25,7 +25,13 @@ class StorePostRequest extends FormRequest
     {
         return [
             'category_id' => ['nullable', 'uuid', Rule::exists('categories', 'id')],
-            'title' => 'required|string|unique:posts,title|min:2|max:200',
+            'title' => [
+                'required', 
+                'string', 
+                'min:2', 
+                'max:200', 
+                Rule::unique('posts', 'title')->where('author_id', $this->user()->id)
+            ],
             'content' => 'required|string|min:10|max:2000',
             'status' => ['string', Rule::in(['draft', 'published'])],
         ];
@@ -38,7 +44,7 @@ class StorePostRequest extends FormRequest
 
             'title.required' => 'Post title is required',
             'title.string' => 'Post title must be a valid string',
-            'title.unique' => 'A post with this title already exists',
+            'title.unique' => 'You already have a post with this title',
             'title.min' => 'Post title must be at least :min characters long',
             'title.max' => 'Post title cannot exceed :max characters',
 
