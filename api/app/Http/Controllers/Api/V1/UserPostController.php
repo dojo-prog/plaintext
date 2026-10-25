@@ -30,7 +30,7 @@ class UserPostController extends Controller
 
     public function publish(Post $post) 
     {
-        abort_if($post->user_id !== request()->user()->id, 403, 'You cannot modify other\'s post');
+        abort_if($post->author_id !== request()->user()->id, 403, 'You cannot modify other\'s post');
 
         abort_if($post->status === 'published', 409, 'Post is already published');
 
@@ -44,7 +44,7 @@ class UserPostController extends Controller
 
     public function draft(Post $post) 
     {
-        abort_if($post->user_id !== request()->user()->id, 403, 'You cannot modify other\'s post');
+        abort_if($post->author_id !== request()->user()->id, 403, 'You cannot modify other\'s post');
 
         abort_if($post->status === 'draft', 409, 'Post is already set to draft');
 
