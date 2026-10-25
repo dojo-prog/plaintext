@@ -20,7 +20,7 @@ class StorePostRequest extends FormRequest
 
     public function failedAuthorization()
     {
-        return new AuthorizationException('Only authenticated users can create posts.');
+        throw new AuthorizationException('Only authenticated users can create posts.');
     }
 
     /**
