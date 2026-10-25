@@ -3,47 +3,39 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class LikeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Like or unlike a post for the authenticated user.
      */
-    public function index()
+    public function toggle(Request $request, Post $post): JsonResponse
     {
-        //
+        $result = $request->user()->likedPosts()->toggle([$post->id]);
+
+        return response()->json([
+            'liked' => count($result['attached']) > 0,
+            'likes_count' => $post->likes()->count(),
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * List the posts the authenticated user has liked.
      */
-    public function store(Request $request)
+    public function index(Request $request): AnonymousResourceCollection
     {
-        //
-    }
+        $posts = $request->user()
+            ->likedPosts()
+            ->with(['author', 'category'])
+            ->withCount('likes')
+            ->orderByPivot('created_at', 'desc')
+            ->paginate();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return PostResource::collection($posts);
     }
 }
