@@ -59,7 +59,7 @@ class CategoryController extends Controller
 
         $validated = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['name']);
+        $validated['slug'] = Str::slug($validated['name'] ?? $category->name);
 
         $category->update($validated);
 

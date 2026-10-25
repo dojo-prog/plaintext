@@ -58,7 +58,7 @@ class PostController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['title']);
+        $validated['slug'] = Str::slug($validated['title'] ?? $post->title);
 
         $post->update($validated);
 
