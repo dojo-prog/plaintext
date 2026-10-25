@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('status', '===', 'published')->with('author')->paginate();
+        $posts = Post::where('status', '=', 'published')->with('author')->paginate();
 
         return PostResource::collection($posts);
     }
