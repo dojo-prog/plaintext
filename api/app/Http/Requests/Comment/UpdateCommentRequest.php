@@ -14,12 +14,12 @@ class UpdateCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', Comment::class);
+        return $this->user()?->can('update', $this->route('comment')) ?? false;
     }
 
     public function failedAuthorization()
     {
-        return new AuthorizationException('You cannot modify someone else\'s comment');
+        throw new AuthorizationException('You cannot modify someone else\'s comment');
     }
     
     /**

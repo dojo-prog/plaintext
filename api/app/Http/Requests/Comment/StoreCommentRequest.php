@@ -15,12 +15,12 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', Comment::class);
+        return $this->user()?->can('create', $this->route('comment')) ?? false;
     }
 
     public function failedAuthorization()
     {
-        return new AuthorizationException('Only authenticated users can make a comments');
+        throw new AuthorizationException('Only authenticated users can make a comments');
     }
     
     /**
