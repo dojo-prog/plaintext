@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StorePostImageRequest;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Services\CloudinaryService;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -68,10 +70,14 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post, CloudinaryService $cloudinary)
     {
         abort_if(request()->user()->id !== $post->author_id, 403, 'You cannot delete others\' posts');
-        
+
+        if ($post->image) {
+            $cloudinary->destroy($post->image);
+        }
+
         $post->delete();
 
         return response()->noContent();
