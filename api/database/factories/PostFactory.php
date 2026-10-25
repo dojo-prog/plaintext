@@ -24,7 +24,7 @@ class PostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => fake()->paragraphs(3, true),
-            'status' => 'draft',
+            'status' => 'published',
         ];
     }
 }
