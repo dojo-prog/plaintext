@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Comment;
 
+use App\Models\Comment;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -13,9 +15,14 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('create', Comment::class);
     }
 
+    public function failedAuthorization()
+    {
+        return new AuthorizationException('Only authenticated users can make a comments');
+    }
+    
     /**
      * Get the validation rules that apply to the request.
      *

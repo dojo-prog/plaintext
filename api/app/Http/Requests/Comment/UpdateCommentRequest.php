@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Comment;
 
+use App\Models\Comment;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,9 +14,14 @@ class UpdateCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('update', Comment::class);
     }
 
+    public function failedAuthorization()
+    {
+        return new AuthorizationException('You cannot modify someone else\'s comment');
+    }
+    
     /**
      * Get the validation rules that apply to the request.
      *
