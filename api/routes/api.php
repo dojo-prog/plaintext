@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\LikeController;
 use App\Http\Controllers\Api\V1\PostController;
+use App\Http\Controllers\Api\V1\PostImageController;
 use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\UserPostController;
 use App\Http\Resources\UserResource;
@@ -25,7 +26,7 @@ Route::middleware(['throttle:api'])->prefix('v1')->group(function () {
     Route::get('/posts/{post}/comments', [CommentController::class, 'index']);
 });
 
-// Authenticated 
+// Authenticated
 
 Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
     Route::get('/user', function (Request $request) {
@@ -38,12 +39,14 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
             Route::patch('/{post}/publish', [UserPostController::class, 'publish']);
             Route::patch('/{post}/draft', [UserPostController::class, 'draft']);
         });
-        
+
         // Posts
         Route::prefix('posts')->group(function () {
             Route::post('/', [PostController::class, 'store'])->name('posts.store');
             Route::patch('/{post}', [PostController::class, 'update'])->name('posts.update');
             Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+            Route::post('/{post}/image', [PostImageController::class, 'storeImage'])->name('posts.image.store');
+            Route::delete('/{post}/image', [PostImageController::class, 'destroyImage'])->name('posts.image.destroy');
             Route::post('/{post}/comments', [CommentController::class, 'store']);
             Route::post('/{post}/like', [LikeController::class, 'toggle'])->name('posts.likes.toggle');
         });
