@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\LikeController;
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\TagController;
+use App\Http\Controllers\Api\V1\UserPostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,12 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
     });
 
     Route::prefix('v1')->group(function () {
+        Route::prefix('/user/posts')->group(function () {
+            Route::get('/', [UserPostController::class, 'index']);
+            Route::patch('/{post}/publish', [UserPostController::class, 'publish']);
+            Route::patch('/{post}/draft', [UserPostController::class, 'draft']);
+        });
+        
         // Posts
         Route::prefix('posts')->group(function () {
             Route::post('/', [PostController::class, 'store'])->name('posts.store');
