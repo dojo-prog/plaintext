@@ -35,11 +35,11 @@ class DatabaseSeeder extends Seeder
         Post::query()->delete();
 
         $primaryUser = User::updateOrCreate(
-            ['email' => 'test@example.com'],
+            ['email' => 'admin@dojo.com'],
             [
-                'name' => 'Test User',
-                'username' => 'test-user',
-                'password' => Hash::make('password'),
+                'name' => 'Dojo Admin',
+                'username' => 'dojo_admin',
+                'password' => Hash::make('testPass'),
             ]
         );
 
