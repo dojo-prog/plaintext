@@ -31,7 +31,6 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'post_id' => ['required', 'uuid', Rule::exists('posts', 'id')],
             'content' => 'required|string|min:1|max:240'
         ];
     }
@@ -39,10 +38,6 @@ class StoreCommentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'post_id.required' => 'Post ID is required',
-            'post_id.uuid' => 'Invalid post ID',
-            'post_id.exists' => 'The selected post does not exist or has been deleted',
-
             'content.required' => 'Comment content is required',
             'content.min' => 'Comment content must be at least :min character long',
             'content.max' => 'Comment cannot exceed :max characters'
