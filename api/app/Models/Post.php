@@ -20,6 +20,7 @@ class Post extends Model
         'slug',
         'content',
         'status',
+        'published_at',
     ];
 
     public function author(): BelongsTo
