@@ -8,12 +8,16 @@ import App from "./App.tsx";
 
 import { BrowserRouter } from "react-router-dom";
 import { ErrorBoundary } from "./components/feedback/ErrorBoundary.tsx";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/tanstack-query/client.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ErrorBoundary>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </ErrorBoundary>
     </BrowserRouter>
   </StrictMode>,
