@@ -26,7 +26,12 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('tags', TagController::class);
         Route::apiResource('posts', PostController::class);
-        Route::apiResource('comments', CommentController::class);
+
+        Route::get('/posts/{post}/comments', [CommentController::class, 'index']);
+        Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
+
+        Route::apiResource('comments', CommentController::class)->except(['index', 'store']);
+
         Route::apiResource('likes', LikeController::class);
     });
 });
