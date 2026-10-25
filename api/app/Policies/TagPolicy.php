@@ -10,7 +10,7 @@ class TagPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -18,9 +18,9 @@ class TagPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Tag $tag): bool
+    public function view(?User $user, Tag $tag): bool
     {
-        return true;
+        return !!$tag;
     }
 
     /**
@@ -45,7 +45,7 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag): bool
     {
-        return $user->hasRole(['admin']);
+        return !!$tag && $user->hasRole(['admin']);
     }
 
     /**
@@ -53,7 +53,7 @@ class TagPolicy
      */
     public function restore(User $user, Tag $tag): bool
     {
-        return $user->hasRole(['admin']);
+        return !!$tag && $user->hasRole(['admin']);
     }
 
     /**
@@ -61,6 +61,6 @@ class TagPolicy
      */
     public function forceDelete(User $user, Tag $tag): bool
     {
-        return $user->hasRole(['admin']);
+        return !!$tag && $user->hasRole(['admin']);
     }
 }
