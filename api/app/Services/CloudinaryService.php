@@ -32,15 +32,20 @@ class CloudinaryService
     public function upload(UploadedFile $file): array
     {
         $timestamp = time();
-        $signature = $this->sign(['timestamp' => $timestamp]);
+        $parameters = ['timestamp' => $timestamp];
+        $folder = config('services.cloudinary.upload_folder');
+
+        if (is_string($folder) && trim($folder) !== '') {
+            $parameters['folder'] = $folder;
+        }
+
+        $signature = $this->sign($parameters);
+        $parameters['api_key'] = $this->credentials['api_key'];
+        $parameters['signature'] = $signature;
 
         $response = Http::throw()
             ->attach('file', $file->getContent(), $file->getClientOriginalName())
-            ->post($this->endpoint('/image/upload'), [
-                'api_key' => $this->credentials['api_key'],
-                'timestamp' => $timestamp,
-                'signature' => $signature,
-            ]);
+            ->post($this->endpoint('/image/upload'), $parameters);
 
         $payload = $response->json();
 

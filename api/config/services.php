@@ -30,6 +30,7 @@ return [
 
     'cloudinary' => [
         'url' => env('CLOUDINARY_URL'),
+        'upload_folder' => env('CLOUDINARY_UPLOAD_FOLDER'),
     ],
 
     'slack' => [
