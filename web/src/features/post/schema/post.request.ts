@@ -1,3 +1,4 @@
+import { PaginationQuerySchema } from "@/schema/common";
 import { z } from "zod";
 
 // =======================================
@@ -8,6 +9,11 @@ export const PostStatusQuerySchema = z.object({
   status: z
     .enum(["draft", "published"], { message: "Invalid post status on query" })
     .optional(),
+});
+
+export const PostQuerySchema = z.object({
+  ...PaginationQuerySchema.shape,
+  ...PostStatusQuerySchema.shape,
 });
 
 // =======================================
@@ -46,6 +52,8 @@ export const UpdatePostSchema = CreatePostSchema.partial().extend({
 // =======================================
 // Types
 // =======================================
+
+export type PostQuery = z.infer<typeof PostQuerySchema>;
 
 export type CreatePostBody = z.infer<typeof CreatePostSchema>;
 
