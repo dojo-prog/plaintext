@@ -53,21 +53,6 @@ const Navbar = () => {
           <span className="text-lg">Dojo</span>
         </Link>
 
-        <nav
-          aria-label="Categories"
-          className="hidden min-w-0 flex-1 items-center gap-5 overflow-hidden md:flex"
-        >
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              to={`/?category=${encodeURIComponent(category.slug)}`}
-              className="truncate text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {category.name}
-            </Link>
-          ))}
-        </nav>
-
         <div className="ml-auto flex shrink-0 items-center gap-2">
           {isUserPending ? (
             <div className="size-8 animate-pulse rounded-full bg-muted" />
