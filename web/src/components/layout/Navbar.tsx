@@ -50,7 +50,9 @@ const Navbar = () => {
           <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <BookOpenText className="size-4" aria-hidden="true" />
           </span>
-          <span className="text-lg">Dojo</span>
+          <span className="text-lg">
+            Plaintext <span className="text-xs text-primary">Dojo</span>
+          </span>
         </Link>
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
