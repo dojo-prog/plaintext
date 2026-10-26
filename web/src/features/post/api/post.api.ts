@@ -7,6 +7,7 @@ import type {
   FetchPostsRes,
   PublishPostRes,
   UpdatePostRes,
+  UploadPostImageRes,
 } from "../types/post.types";
 
 export const fetchPosts = async (params: PostQuery) => {
@@ -44,7 +45,7 @@ export const deletePost = async (postId: string): Promise<void> => {
 };
 
 export const publishPost = async (postId: string) => {
-  const { data } = await api.post<PublishPostRes>(
+  const { data } = await api.patch<PublishPostRes>(
     `/v1/user/posts/${postId}/publish`,
   );
 
@@ -52,9 +53,25 @@ export const publishPost = async (postId: string) => {
 };
 
 export const draftPost = async (postId: string) => {
-  const { data } = await api.post<DraftPostRes>(
-    `/v1/user/posts/${postId}/draft`,
+  const { data } = await api.patch<DraftPostRes>(
+    `/v1/user/posts/${postId}/draft`
   );
 
   return data.data;
+};
+
+export const uploadPostImage = async (postId: string, image: File) => {
+  const formData = new FormData();
+  formData.append("image", image);
+
+  const { data } = await api.post<UploadPostImageRes>(
+    `/v1/posts/${postId}/image`,
+    formData
+  );
+
+  return data.data;
+};
+
+export const deletePostImage = async (postId: string): Promise<void> => {
+  await api.delete(`/v1/posts/${postId}/image`);
 };
