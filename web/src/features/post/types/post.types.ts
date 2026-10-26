@@ -16,3 +16,5 @@ export type UpdatePostRes = ApiResponse<Post>;
 export type PublishPostRes = ApiResponse<Post>;
 
 export type DraftPostRes = ApiResponse<Post>;
+
+export type UploadPostImageRes = ApiResponse<Post>;
