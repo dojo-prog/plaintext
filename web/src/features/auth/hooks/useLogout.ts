@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logout } from "../api/auth.api";
 import { toast } from "sonner";
 import { env } from "@/config/env";
+import { handleApiError } from "@/utils/errors/handleApiError";
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
@@ -16,5 +17,7 @@ export const useLogout = () => {
 
       toast.success("Logout successful");
     },
+
+    onError: handleApiError,
   });
 };
