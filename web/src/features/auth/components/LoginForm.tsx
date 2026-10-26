@@ -83,7 +83,7 @@ const LoginForm = () => {
                   {...form.register("password")}
                 />
 
-                <FieldError errors={[form.formState.errors.email]} />
+                <FieldError errors={[form.formState.errors.password]} />
               </Field>
 
               {/* Login Button */}
