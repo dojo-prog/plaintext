@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Post\StorePostImageRequest;
+use App\Http\Requests\Post\PostIndexRequest;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Services\CloudinaryService;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -16,11 +18,21 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PostIndexRequest $request): AnonymousResourceCollection
     {
-        $posts = Post::where('status', '=', 'published')->with('author')->paginate();
+        $filters = $request->validated();
+        $query = Post::where('status', '=', 'published')
+            ->with(['author', 'category'])
+            ->withCount('likes');
 
-        return PostResource::collection($posts);
+        if (isset($filters['category'])) {
+            $categorySlug = $filters['category'];
+            $query->whereHas('category', function (Builder $categoryQuery) use ($categorySlug): void {
+                $categoryQuery->where('slug', $categorySlug);
+            });
+        }
+
+        return PostResource::collection($query->paginate());
     }
 
     /**
