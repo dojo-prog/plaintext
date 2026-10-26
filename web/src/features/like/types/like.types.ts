@@ -6,3 +6,8 @@ import type { PaginatedResponse } from "@/types/api.types";
 // =======================================
 
 export type FetchUserLikedPostRes = PaginatedResponse<Post[]>;
+
+export type ToggleLikeRes = {
+  liked: boolean;
+  likes_count: number;
+};
