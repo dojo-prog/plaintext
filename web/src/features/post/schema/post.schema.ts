@@ -28,6 +28,7 @@ export const PostSchema = z.object({
   image_url: z.string().nullable(),
   status: PostStatusSchema,
   likes_count: z.number().optional(),
+  is_liked: z.boolean().optional(),
   published_at: z.string().nullable(),
 
   created_at: z.string(),

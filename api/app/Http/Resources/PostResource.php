@@ -27,6 +27,10 @@ class PostResource extends JsonResource
             'image_url' => $this->image_url,
             'status' => $this->status,
             'likes_count' => $this->whenCounted('likes'),
+            'is_liked' => $this->when(
+                $this->resource->getAttribute('is_liked') !== null,
+                fn () => (bool) $this->resource->getAttribute('is_liked')
+            ),
             'published_at' => $this->published_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
