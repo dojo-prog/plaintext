@@ -18,7 +18,7 @@ class CommentController extends Controller
     {
         $this->authorize('viewAny', Comment::class);
 
-        $comments = $post->comments()->with('user')->get();
+        $comments = $post->comments()->with('user')->latest()->paginate();
 
         return CommentResource::collection($comments);
     }
@@ -32,7 +32,7 @@ class CommentController extends Controller
 
         $comment = $post->comments()->create([
             ...$validated,
-            'user_id' => $request->user()->id
+            'user_id' => $request->user()->id,
         ]);
 
         $comment->load('user');
@@ -72,6 +72,6 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return response()->noContent(); 
+        return response()->noContent();
     }
 }
