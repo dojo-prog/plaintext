@@ -14,6 +14,7 @@ export const PostStatusQuerySchema = z.object({
 export const PostQuerySchema = z.object({
   ...PaginationQuerySchema.shape,
   ...PostStatusQuerySchema.shape,
+  category: z.string().min(1).optional(),
 });
 
 // =======================================
