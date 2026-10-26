@@ -24,7 +24,7 @@ class PostController extends Controller
         $filters = $request->validated();
         $query = Post::where('status', '=', 'published')
             ->with(['author', 'category'])
-            ->withCount('likes');
+            ->withCount('likes')->latest();
 
         if (isset($filters['category'])) {
             $categorySlug = $filters['category'];

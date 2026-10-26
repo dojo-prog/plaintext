@@ -19,7 +19,7 @@ class UserPostController extends Controller
         $user = $request->user();
 
         $query = $user->posts()
-            ->with('author');
+            ->with('author')->latest();
             
         if (isset($validated['status'])) {
             $query->where('status', $validated['status']);
