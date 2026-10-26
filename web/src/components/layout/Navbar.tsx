@@ -15,6 +15,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -87,7 +88,9 @@ const Navbar = () => {
                 <ChevronDown className="hidden size-4 text-muted-foreground sm:block" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+                </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => navigate("/profile")}>
                   <UserRound aria-hidden="true" />
