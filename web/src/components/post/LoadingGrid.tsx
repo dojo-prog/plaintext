@@ -7,6 +7,7 @@ type LoadingGridProps = {
 const LoadingGrid = ({ count = 6 }: LoadingGridProps) => {
   return (
     <div
+      role="status"
       className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
       aria-label="Loading posts"
       aria-busy="true"
