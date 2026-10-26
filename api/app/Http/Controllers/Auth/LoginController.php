@@ -19,10 +19,12 @@ class LoginController extends Controller
         $user = $request->user();
         $token = $user->createToken('main')->plainTextToken;
 
-        return [
-            'user' => new UserResource($user),
-            'token' => $token
-        ];
+        return ([
+            'data' => [
+                'user' => new UserResource($user),
+                'token' => $token
+            ]
+        ]);
     }
 
     /**
