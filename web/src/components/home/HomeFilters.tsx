@@ -7,6 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { Category } from "@/features/category/schema";
+import { capitalize } from "@/utils/capitalize";
 
 type HomeFiltersProps = {
   categories: Category[];
@@ -41,12 +42,18 @@ const HomeFilters = ({
           <label htmlFor="post-status" className="text-sm font-medium">
             Status
           </label>
-          <Select value="published" onValueChange={onStatusChange}>
+          <Select
+            items={{ published: capitalize("Published") }}
+            value="published"
+            onValueChange={onStatusChange}
+          >
             <SelectTrigger id="post-status" className="w-full sm:w-44">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="published">Published</SelectItem>
+              <SelectItem value="published">
+                {capitalize("Published")}
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -55,15 +62,29 @@ const HomeFilters = ({
           <label htmlFor="post-category" className="text-sm font-medium">
             Category
           </label>
-          <Select value={selectedCategory} onValueChange={onCategoryChange}>
+          <Select
+            items={{
+              all: capitalize("All categories"),
+              ...Object.fromEntries(
+                categories.map((category) => [
+                  category.slug,
+                  capitalize(category.name),
+                ]),
+              ),
+            }}
+            value={selectedCategory}
+            onValueChange={onCategoryChange}
+          >
             <SelectTrigger id="post-category" className="w-full sm:w-56">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All categories</SelectItem>
+              <SelectItem value="all">
+                {capitalize("All categories")}
+              </SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category.id} value={category.slug}>
-                  {category.name}
+                  {capitalize(category.name)}
                 </SelectItem>
               ))}
             </SelectContent>
