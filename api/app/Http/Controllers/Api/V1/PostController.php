@@ -10,6 +10,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Services\CloudinaryService;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Str;
 
@@ -56,11 +57,15 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Request $request, Post $post): PostResource
     {
         abort_if($post->status !== 'published', 404, 'Post not found');
 
-        $post->load('author');
+        $post->load(['author', 'category'])->loadCount('likes');
+        $user = $request->user('sanctum');
+        $post->setAttribute('is_liked', $user
+            ? $post->likes()->whereKey($user->getKey())->exists()
+            : false);
 
         return new PostResource($post);
     }
