@@ -59,10 +59,14 @@ class PostController extends Controller
      */
     public function show(Request $request, Post $post): PostResource
     {
-        abort_if($post->status !== 'published', 404, 'Post not found');
+        $user = $request->user('sanctum');
+        abort_if(
+            $post->status !== 'published' && $post->author_id !== $user?->id,
+            404,
+            'Post not found'
+        );
 
         $post->load(['author', 'category'])->loadCount('likes');
-        $user = $request->user('sanctum');
         $post->setAttribute('is_liked', $user
             ? $post->likes()->whereKey($user->getKey())->exists()
             : false);
