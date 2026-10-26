@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toggleLike } from "../api/like.api";
-import { env } from "@/config/env";
+import { toast } from "sonner";
+import { handleApiError } from "@/utils/errors/handleApiError";
 
 export const useToggleLike = () => {
   const queryClient = useQueryClient();
@@ -8,15 +9,17 @@ export const useToggleLike = () => {
   return useMutation({
     mutationFn: toggleLike,
 
-    onSuccess: () => {
+    onSuccess: ({ liked }) => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       queryClient.invalidateQueries({ queryKey: ["current-user-liked-posts"] });
-    },
 
-    onError: (error) => {
-      if (env.environment !== "production") {
-        console.error(error);
+      if (liked) {
+        toast.success("Post liked");
+      } else {
+        toast.success("Like removed from post");
       }
     },
+
+    onError: handleApiError,
   });
 };
