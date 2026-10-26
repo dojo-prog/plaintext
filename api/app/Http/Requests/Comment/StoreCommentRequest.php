@@ -6,7 +6,6 @@ use App\Models\Comment;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreCommentRequest extends FormRequest
 {
@@ -15,14 +14,14 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()?->can('create', $this->route('comment')) ?? false;
+        return $this->user()?->can('create', Comment::class) ?? false;
     }
 
     public function failedAuthorization()
     {
         throw new AuthorizationException('Only authenticated users can make a comments');
     }
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +30,7 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|string|min:1|max:240'
+            'content' => 'required|string|min:1|max:240',
         ];
     }
 
@@ -40,7 +39,7 @@ class StoreCommentRequest extends FormRequest
         return [
             'content.required' => 'Comment content is required',
             'content.min' => 'Comment content must be at least :min character long',
-            'content.max' => 'Comment cannot exceed :max characters'
+            'content.max' => 'Comment cannot exceed :max characters',
         ];
     }
 }
