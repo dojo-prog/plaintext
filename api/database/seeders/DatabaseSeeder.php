@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -50,7 +51,24 @@ class DatabaseSeeder extends Seeder
 
         $this->command->info('Seeding categories, tags and posts...');
 
-        $categories = Category::factory()->count(4)->create();
+        $categoryNames = [
+            'Programming',
+            'Web Development',
+            'Software Engineering',
+            'Computer Science',
+            'Artificial Intelligence',
+            'Data Science',
+            'Cybersecurity',
+            'Cloud Computing',
+            'DevOps',
+            'Hardware and Systems',
+        ];
+        $categories = collect($categoryNames)->map(
+            fn (string $name): Category => Category::query()->create([
+                'name' => $name,
+                'slug' => Str::slug($name),
+            ])
+        );
         $tags = Tag::factory()->count(6)->create();
 
         $posts = Post::factory()
