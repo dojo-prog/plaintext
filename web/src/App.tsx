@@ -10,6 +10,8 @@ import CreatePostPage from "./pages/CreatePostPage";
 import EditPostPage from "./pages/EditPostPage";
 import NotFoundPage from "./components/feedback/NotFound";
 import ProfilePage from "./pages/ProfilePage";
+import PostPage from "./pages/PostPage";
+import UserLikedPostsPage from "./pages/UserLikedPostsPage";
 
 const App = () => {
   return (
@@ -22,9 +24,11 @@ const App = () => {
 
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="posts/:postId" element={<PostPage />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="liked-post" element={<UserLikedPostsPage />} />
             <Route path="posts/create" element={<CreatePostPage />} />
             <Route path="posts/:postId/edit" element={<EditPostPage />} />
           </Route>
