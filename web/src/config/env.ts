@@ -10,6 +10,7 @@ const getReqEnv = (name: string) => {
 
 export const env = {
   environment: getReqEnv("VITE_ENVIRONMENT"),
+  authTokenName: getReqEnv("VITE_AUTH_TOKEN_NAME"),
 
   ...(import.meta.env["VITE_ENVIRONMENT"] === "production"
     ? {

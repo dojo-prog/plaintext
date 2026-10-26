@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logout } from "../api/auth.api";
 import { toast } from "sonner";
+import { env } from "@/config/env";
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ export const useLogout = () => {
     onSuccess: () => {
       queryClient.clear();
 
-      localStorage.removeItem("plaintext_auth_token");
+      localStorage.removeItem(env.authTokenName);
 
       toast.success("Logout successful");
     },

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { api } from "./client";
 import { ApiError } from "@/utils/errors/ApiError";
+import { env } from "@/config/env";
 
 api.interceptors.response.use(
   (res) => res,
@@ -25,7 +26,7 @@ api.interceptors.response.use(
 
 api.interceptors.request.use(
   (config) => {
-    const auth_token = localStorage.getItem("plaintext_auth_token");
+    const auth_token = localStorage.getItem(env.authTokenName);
 
     if (auth_token) {
       config.headers.Authorization = `Bearer ${auth_token}`;
