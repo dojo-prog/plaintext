@@ -1,0 +1,754 @@
+{
+  "info": {
+    "_postman_id": "9ea8519b-7be9-4f5d-a8a9-5c35a1dd0b99",
+    "name": "plaintext-laravel",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46881080"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Donald John\",\r\n    \"email\": \"donald@example.com\",\r\n    \"password\": \"testPass\",\r\n    \"password_confirmation\": \"testPass\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@dojo.com\",\r\n    \"password\": \"testPass\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "Get Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/categories/01a16dce-383a-708f-bdc0-823b46eabf4b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "01a16dce-383a-708f-bdc0-823b46eabf4b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Another One\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/categories/01a16ddb-5004-72b6-ab91-68ff1c97e9f4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "01a16ddb-5004-72b6-ab91-68ff1c97e9f4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/categories/01a16dce-383a-708f-bdc0-823b46eabf4b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "01a16dce-383a-708f-bdc0-823b46eabf4b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Computer Programming\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tag",
+      "item": [
+        {
+          "name": "Get Tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/tags",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "tags"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Tag",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/tags/01a16dce-3840-70a4-9520-b116a16801a1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "tags",
+                "01a16dce-3840-70a4-9520-b116a16801a1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Tag",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/tags/01a16dce-3840-70a4-9520-b116a16801a1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "tags",
+                "01a16dce-3840-70a4-9520-b116a16801a1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Tag",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Sample Tag\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Post",
+      "item": [
+        {
+          "name": "Get Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts/01a16dce-3851-7005-a001-caabad74ac8d",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "01a16dce-3851-7005-a001-caabad74ac8d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"category_id\": \"01a16dce-383c-73fd-abaf-16b06a511fc0\",\r\n\r\n    \"title\": \"Sample Post 3\", \r\n    \"content\": \"Ad maiores dicta aut veniam. Quisquam consequuntur ut unde nisi et explicabo. Consectetur eos qui sint quam est alias et vero. Doloribus vitae consequatur quaerat nam voluptatem quae inventore.\\n\\nAtque autem itaque earum enim minima mollitia fugit. Facilis voluptas sit et eligendi debitis vel. Quas eligendi expedita reprehenderit ab reprehenderit.\\n\\nEnim qui qui amet nihil dolore reiciendis aliquid. Doloribus et aut tempore ut qui possimus voluptatum. Dolores repellat qui velit quis delectus.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"category_id\": \"01a16dce-383c-73fd-abaf-16b06a511fc0\",\r\n\r\n    \"title\": \"Updated Post 3\", \r\n    \"content\": \"Ad maiores dicta aut veniam. Quisquam consequuntur ut unde nisi et explicabo. Consectetur eos qui sint quam est alias et vero. Doloribus vitae consequatur quaerat nam voluptatem quae inventore.\\n\\nAtque autem itaque earum enim minima mollitia fugit. Facilis voluptas sit et eligendi debitis vel. Quas eligendi expedita reprehenderit ab reprehenderit.\\n\\nEnim qui qui amet nihil dolore reiciendis aliquid. Doloribus et aut tempore ut qui possimus voluptatum. Dolores repellat qui velit quis delectus.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts/01a16dce-3851-7005-a001-caabad74ac8d",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "01a16dce-3851-7005-a001-caabad74ac8d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts/01a16dce-3855-70d8-9698-dda1c6c79eef",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "01a16dce-3855-70d8-9698-dda1c6c79eef"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Posts",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Draft Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/user/posts/01a1731a-3877-7116-8ca7-067457962536/draft",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "posts",
+                "01a1731a-3877-7116-8ca7-067457962536",
+                "draft"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Publish Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/user/posts/01a1731a-3877-7116-8ca7-067457962536/publish",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "posts",
+                "01a1731a-3877-7116-8ca7-067457962536",
+                "publish"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comment",
+      "item": [
+        {
+          "name": "Get Comments on Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts/01a1717c-e2ee-7037-8a8e-d817cdd6e2d7/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "01a1717c-e2ee-7037-8a8e-d817cdd6e2d7",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"post_id\": \"01a1717c-e2ee-7037-8a8e-d817cdd6e2d7\",\r\n    \"content\": \"Ad maiores dicta aut veniam. Quisquam consequuntur ut unde nisi et explicabo.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts/01a1717c-e2ee-7037-8a8e-d817cdd6e2d7/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "01a1717c-e2ee-7037-8a8e-d817cdd6e2d7",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"category_id\": \"01a16dce-383c-73fd-abaf-16b06a511fc0\",\r\n\r\n    \"title\": \"Updated Post 3\", \r\n    \"content\": \"Ad maiores dicta aut veniam. Quisquam consequuntur ut unde nisi et explicabo. Consectetur eos qui sint quam est alias et vero. Doloribus vitae consequatur quaerat nam voluptatem quae inventore.\\n\\nAtque autem itaque earum enim minima mollitia fugit. Facilis voluptas sit et eligendi debitis vel. Quas eligendi expedita reprehenderit ab reprehenderit.\\n\\nEnim qui qui amet nihil dolore reiciendis aliquid. Doloribus et aut tempore ut qui possimus voluptatum. Dolores repellat qui velit quis delectus.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts/01a16dce-3851-7005-a001-caabad74ac8d",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "01a16dce-3851-7005-a001-caabad74ac8d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/comments/01a1719e-f405-70be-afb8-176bd0714452",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "comments",
+                "01a1719e-f405-70be-afb8-176bd0714452"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Like",
+      "item": [
+        {
+          "name": "Get user liked posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/likes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "likes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Like post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/posts/01a1717c-e2ee-7037-8a8e-d817cdd6e2d7/like",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "01a1717c-e2ee-7037-8a8e-d817cdd6e2d7",
+                "like"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "6|ByUJPmY6WTCfjLvgeIJfCVHjg7oDkCAv8D19ntvL22e08bdb",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
